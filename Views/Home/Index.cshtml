@@ -3,33 +3,42 @@
 }
 
 <!--Tells View what data type to expect Model data passed in controller to be in-->
-@model IQueryable<Book>
-
-<div>
-    <h1>Welcome to the Online Bookstore</h1>
-</div>
-<br /><br />
+<!--BookListViewModel compiles info from multiple models-->
+@model BookListViewModel
 
 <!--For each Book in the Model, add styling and print out property information-->
-@foreach (var x in Model)
+<!--Have to specify which property of the Model; Books or PagingInfo-->
+@foreach (var x in Model.Books)
 {
-<div class="card card-outline-primary m-1 p-1">
-    <div class="bg-faded p-1">
-        <h4>
+<div class="card card-outline-primary shadow p-2 mb-4 bg-light rounded">
+    <div class="card-header">
+        <small>ISBN: @x.ISBN</small>
+    </div>
+    
+    <div class="card-body">
+        <h3 class="card-title">
             @x.Title
             <span class="badge badge-pill badge-primary" style="float:right">
                 <small>@x.Price.ToString("c")</small>
             </span>
-        </h4>
-    </div>
-    <div class="card-text p-1">
-        Author: @x.AuthorLastName, @x.AuthorFirstName @x.AuthorMiddleName<br />
-        Classification/Category: @x.Classification/@x.Category<br />
+        </h3>
+        <p>Author: @x.AuthorLastName, @x.AuthorFirstName @x.AuthorMiddleName<br />
+        Classification: @x.Classification; Category: @x.Classification<br />
         Publisher: @x.Publisher<br />
-        ISBN: @x.ISBN
+        Number of Pages: @x.PageCount</p>
     </div>
 </div>
-<br />
 }
+
+<!--Implement dynamically built navigation bar using tag helper using "page-model" attribute-->
+<div page-model="@Model.PagingInfo" page-action="Index"
+     page-classes-enabled="true"
+     page-class="btn"
+     page-class-normal="btn-outline-dark"
+     page-class-selected="btn-primary"
+     class="btn-group pull-right m-1">
+</div>
+
+
 
 

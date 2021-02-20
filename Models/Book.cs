@@ -34,5 +34,9 @@ namespace OnlineBookstore.Models
         public string Category { get; set; }
         [Required]
         public double Price { get; set; }
+
+        //New Database field added - number of pages in the book
+        [Required]
+        public int PageCount { get; set; }
     }
 }
