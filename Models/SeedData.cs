@@ -77,7 +77,7 @@ namespace OnlineBookstore.Models
                             AuthorMiddleName = "C.",
                             AuthorLastName = "White",
                             Publisher = "Random House",
-                            ISBN = "978-0812981254 ",
+                            ISBN = "978-0812981254",
                             Classification = "Non-Fiction",
                             Category = "Biography",
                             Price = 11.61,
@@ -149,11 +149,50 @@ namespace OnlineBookstore.Models
                             AuthorFirstName = "John",
                             AuthorLastName = "Grisham",
                             Publisher = "Bantam",
-                            ISBN = "978-0553393613 ",
+                            ISBN = "978-0553393613",
                             Classification = "Fiction",
                             Category = "Thriller",
                             Price = 15.03,
-                            PageCount = 642
+                            PageCount = 642 
+                        },
+
+                        //New Books added after implementing pagination
+                        //Required rerunning migrations and updating the database
+                        new Book
+                        {
+                            Title = "The Way of Kings",
+                            AuthorFirstName = "Brandon",
+                            AuthorLastName = "Sanderson",
+                            Publisher = "Tor Fantasy",
+                            ISBN = "978-0765365279",
+                            Classification = "Fiction",
+                            Category = "Fantasy",
+                            Price = 9.59,
+                            PageCount = 1280
+                        },
+                        new Book
+                        {
+                            Title = "All Systems Red",
+                            AuthorFirstName = "Martha",
+                            AuthorLastName = "Wells",
+                            Publisher = "Tor",
+                            ISBN = "978-0765397539",
+                            Classification = "Science Fiction",
+                            Category = "Fantasy",
+                            Price = 13.39,
+                            PageCount = 160
+                        },
+                        new Book
+                        {
+                            Title = "20,000 Leagues Under the Sea",
+                            AuthorFirstName = "Jules",
+                            AuthorLastName = "Verne",
+                            Publisher = "Wordsworth Editions Ltd",
+                            ISBN = "978-1853260315",
+                            Classification = "Science Fiction",
+                            Category = "Classic",
+                            Price = 3.95,
+                            PageCount = 256
                         }
                     );
 

@@ -57,7 +57,7 @@ namespace OnlineBookstore.Infrastructure
             //Create <a> tag for each page needed (TotalPages from PagingInfo) and the href using the page parameter
             for (int i = 1; i <= PageModel.TotalPages; i++)
             {
-                TagBuilder tag = new TagBuilder("a");
+                TagBuilder tag = new TagBuilder("a");  
                 tag.Attributes["href"] = urlHelper.Action(PageAction, new { page = i });
 
                 //Manage styling
