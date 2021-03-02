@@ -38,6 +38,12 @@ namespace OnlineBookstore.Infrastructure
         public PagingInfo PageModel { get; set; }
         public string PageAction { get; set; }
 
+        //Attribute for tracking category filter
+        //Anytime someone enters "page-url-(whatever)", adds it to dictionary
+        //ASP.NET groups properties with a common prefix
+        [HtmlAttributeName(DictionaryAttributePrefix = "page-url-")]
+        public Dictionary<string, object> PageUrlValues { get; set; } = new Dictionary<string, object>();
+
         //Attributes to manage styling
         public bool PageClassesEnabled { get; set; } = false;
         public string PageClass { get; set; }
@@ -57,8 +63,11 @@ namespace OnlineBookstore.Infrastructure
             //Create <a> tag for each page needed (TotalPages from PagingInfo) and the href using the page parameter
             for (int i = 1; i <= PageModel.TotalPages; i++)
             {
-                TagBuilder tag = new TagBuilder("a");  
-                tag.Attributes["href"] = urlHelper.Action(PageAction, new { page = i });
+                TagBuilder tag = new TagBuilder("a");
+
+                //track page currently on in dictionary
+                PageUrlValues["page"] = i;
+                tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
 
                 //Manage styling
                 if (PageClassesEnabled)

@@ -47,12 +47,17 @@ namespace OnlineBookstore.Controllers
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalNumItems = _repository.Books.Count()
+                        //TotalNumItems = _repository.Books.Count()
+                        //Have to set number of pages based on number of books returned (may be filtered) not always total count
+                        TotalNumItems = 
+                            category == null ? _repository.Books.Count() //If category is null, use total count of books
+                            :
+                            _repository.Books.Where(x => x.Category == category).Count()
+                            //If category is passed, take count of books with that category to determine number of pages
                     },
 
                     //Track category for filtering
                     CurrentCategory = category
-                    
                 });
         }
 

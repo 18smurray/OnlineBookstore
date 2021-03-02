@@ -1,0 +1,23 @@
+﻿<!--Default for how to format Navigation Menu View Component returned data-->
+
+<!--Type of data the partial view is returning-->
+@model IEnumerable<string>
+
+<!--Button for no filter (category="")-->
+<a class="btn btn-block btn-outline-secondary"
+   asp-action="Index" asp-controller="Home"
+   asp-route-category="">
+    Home
+</a>
+
+<!--Dynamic links for every category passed in-->
+@foreach(string category in Model)
+{
+    <!--Can make decision based on ViewBag; if category is selected category, highlight it-->
+    <a class="btn btn-block @(category == ViewBag.SelectedCategory ? "btn-primary" : "btn-outline-secondary")"
+       asp-action="Index" asp-controller="Home"
+       asp-route-category="@category">
+
+        @category
+    </a>
+}
