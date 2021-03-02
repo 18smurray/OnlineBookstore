@@ -30,7 +30,7 @@ namespace OnlineBookstore
             //Pass connection info for connecting to database using connection string
             services.AddDbContext<BookstoreDbContext>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionStrings:OnlineBookstoreConnection"]);
+                options.UseSqlite(Configuration["ConnectionStrings:OnlineBookstoreConnection"]);
             });
 
             //Each session gets its own repository object - takes service and implementation 
