@@ -10,24 +10,8 @@
 <!--Have to specify which property of the Model; Books or PagingInfo-->
 @foreach (var x in Model.Books)
 {
-<div class="card card-outline-primary shadow p-2 mb-4 bg-light rounded">
-    <div class="card-header">
-        <small>ISBN: @x.ISBN</small>
-    </div>
-    
-    <div class="card-body">
-        <h3 class="card-title">
-            @x.Title
-            <span class="badge badge-pill badge-primary" style="float:right">
-                <small>@x.Price.ToString("c")</small>
-            </span>
-        </h3>
-        <p>Author: @x.AuthorLastName, @x.AuthorFirstName @x.AuthorMiddleName<br />
-        Classification: @x.Classification; Category: @x.Category<br />
-        Publisher: @x.Publisher<br />
-        Number of Pages: @x.PageCount</p>
-    </div>
-</div>
+    //Use the partial view, send "x" as the Model (contains data for a single Book instance)
+    <partial name="BookSummary" model="x" />
 }
 
 <!--Implement dynamically built navigation bar using tag helper using "page-model" attribute-->

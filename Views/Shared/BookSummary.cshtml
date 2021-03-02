@@ -1,0 +1,27 @@
+﻿<!--Partial View - Serve as a summary of a single book
+    Can use display book functionality accross multiple pages
+    Piece partial views together for new pages-->
+
+<!--Anticipates Model of type "Book" passed when partial view is referenced (index page)-->
+@model Book
+
+<div class="card card-outline-primary shadow p-2 mb-4 bg-light rounded">
+    <div class="card-header">
+        <small>ISBN: @Model.ISBN</small>
+    </div>
+
+    <div class="card-body">
+        <h3 class="card-title">
+            @Model.Title
+            <span class="badge badge-pill badge-primary" style="float:right">
+                <small>@Model.Price.ToString("c")</small>
+            </span>
+        </h3>
+        <p>
+            Author: @Model.AuthorLastName, @Model.AuthorFirstName @Model.AuthorMiddleName<br />
+            Classification: @Model.Classification; Category: @Model.Category<br />
+            Publisher: @Model.Publisher<br />
+            Number of Pages: @Model.PageCount
+        </p>
+    </div>
+</div>

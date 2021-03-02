@@ -25,13 +25,17 @@ namespace OnlineBookstore.Controllers
         }
 
         //Expects page number as a parameter; default is page 1
-        public IActionResult Index(int page = 1) 
+        //Add another parameter for keeping track of category filter (passed in url request)
+        public IActionResult Index(string category, int page = 1) 
         {
             return View(
                 // Has Books and Paging Info
                 new BookListViewModel
                 {
                     Books = _repository.Books
+                    //Filtering by cateogry; if no category passed, return all books, 
+                    //otherwise return books where the category matches the category filter passed (can't be both)
+                    .Where(b => category == null || b.Category == category)
                     .OrderBy(b => b.BookId) //Orders books by their ids
                     .Skip((page - 1) * PageSize) //Skip items depending on the current page
                     .Take(PageSize) //Return the correct number of items
@@ -44,7 +48,11 @@ namespace OnlineBookstore.Controllers
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
                         TotalNumItems = _repository.Books.Count()
-                    }
+                    },
+
+                    //Track category for filtering
+                    CurrentCategory = category
+                    
                 });
         }
 

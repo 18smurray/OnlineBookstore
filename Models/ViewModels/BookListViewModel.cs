@@ -11,5 +11,8 @@ namespace OnlineBookstore.Models.ViewModels
         //Contains two sets of information
         public IEnumerable<Book> Books { get; set; }
         public PagingInfo PagingInfo { get; set; }
+
+        //Attribute for tracking category filter; have to set in Controller
+        public string CurrentCategory { get; set; }
     }
 }
