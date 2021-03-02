@@ -62,21 +62,26 @@ namespace OnlineBookstore
                 //Custom url for when user inputs category and page number
                 endpoints.MapControllerRoute(
                     "catandpage",
-                    "{category}/P{page:int}",
+                    "{category}/{page:int}",
                     new { Controller = "Home", action = "Index" });
 
-                //This one has to go first...?
-                //Customize the url user sees when navigating to different page numbers of the Index view
+                //Custom url for when user inputs number only
                 endpoints.MapControllerRoute(
-                    "pagination",
-                    "P{page:int}",
+                    "pageonly",
+                    "{page:int}",
                     new { Controller = "Home", action = "Index" });
 
                 //Custom url for when user inputs category only
                 endpoints.MapControllerRoute(
                     "catonly",
                     "{category}",
-                    new { Controller = "Home", action = "Index", page = 1}); //Set default page as 1
+                    new { Controller = "Home", action = "Index", page=1 }); //Set default page as 1
+
+                //Customize the url user sees when navigating to different page numbers of the Index view
+                endpoints.MapControllerRoute(
+                    "pagination",
+                    "P{page:int}",
+                    new { Controller = "Home", action = "Index" });
 
                 endpoints.MapDefaultControllerRoute();
             });

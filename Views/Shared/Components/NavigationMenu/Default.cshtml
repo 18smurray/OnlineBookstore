@@ -14,9 +14,11 @@
 @foreach(string category in Model)
 {
     <!--Can make decision based on ViewBag; if category is selected category, highlight it-->
+    <!--Set url parameters using the asp-route- tags; set to page 1-->
     <a class="btn btn-block @(category == ViewBag.SelectedCategory ? "btn-primary" : "btn-outline-secondary")"
        asp-action="Index" asp-controller="Home"
-       asp-route-category="@category">
+       asp-route-category="@category"
+       asp-route-page="1">
 
         @category
     </a>
