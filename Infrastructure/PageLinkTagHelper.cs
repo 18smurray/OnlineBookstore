@@ -66,7 +66,7 @@ namespace OnlineBookstore.Infrastructure
                 TagBuilder tag = new TagBuilder("a");
 
                 //track page currently on in dictionary
-                PageUrlValues["page"] = i;
+                PageUrlValues["pageNum"] = i;
                 tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
 
                 //Manage styling

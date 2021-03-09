@@ -1,0 +1,53 @@
+﻿@page
+@model OnlineBookstore.Pages.PurchaseModel
+@{
+}
+<!--Razor Page - self-contained view
+    Has all display components built into the page-->
+
+<!--Can put name of file at end of url to get to this page
+    Ex: /purchase OR /Purchase (html isn't case sensitive)-->
+
+<!--@@page - indicates to system that this is a razor page-->
+<!--@@model - auto generated with creation of the page; model specifically for this page-->
+
+<h2>Your Cart</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Book</th><th>Quantity</th><th>Price</th><th>Subtotal</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <!--Remember the Purchase Model gets and sets the Cart object from the session, which contains 
+            the CartLines (bundles of line info) in the Lines list-->
+        @foreach(var line in Model.Cart.Lines)
+        {
+            <tr>
+                <td class="text-left">@line.Book.Title</td>
+                <td class="text-center">@line.Quantity</td>
+                <td class="text-right">@line.Book.Price</td>
+                <!--Calc subtotal by multiplying price by quantity for a particular line-->
+                <td class="text-right">@((line.Quantity * line.Book.Price).ToString("c"))</td>
+            </tr>
+        }
+    </tbody>
+
+    <!--Display total of all objects in cart-->
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Total:</td>
+            <td class="text-right">@Model.Cart.ComputeTotalSum().ToString("c")</td>
+        </tr>
+    </tfoot>
+
+</table>
+
+<!--Continue shopping button
+    Make use of the returnUrl-->
+<div class="text-center">
+    <a class="btn btn-primary" href="@Model.ReturnUrl">
+        Continue Shopping
+    </a>
+</div>

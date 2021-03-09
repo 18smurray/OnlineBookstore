@@ -35,6 +35,14 @@ namespace OnlineBookstore
 
             //Each session gets its own repository object - takes service and implementation 
             services.AddScoped<iBookstoreRepository, EFBookstoreRepository>();
+
+            //Enable use of razor pages
+            services.AddRazorPages();
+
+            //Enables use of the session storage - initialize session at runtime
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +61,9 @@ namespace OnlineBookstore
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            //Allows application to use session
+            app.UseSession();
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -62,28 +73,32 @@ namespace OnlineBookstore
                 //Custom url for when user inputs category and page number
                 endpoints.MapControllerRoute(
                     "catandpage",
-                    "{category}/{page:int}",
+                    "{category}/{pageNum:int}",
                     new { Controller = "Home", action = "Index" });
 
                 //Custom url for when user inputs number only
                 endpoints.MapControllerRoute(
                     "pageonly",
-                    "{page:int}",
+                    "{pageNum:int}",
                     new { Controller = "Home", action = "Index" });
 
                 //Custom url for when user inputs category only
                 endpoints.MapControllerRoute(
                     "catonly",
                     "{category}",
-                    new { Controller = "Home", action = "Index", page=1 }); //Set default page as 1
+                    new { Controller = "Home", action = "Index", pageNum=1 }); //Set default page as 1
 
                 //Customize the url user sees when navigating to different page numbers of the Index view
                 endpoints.MapControllerRoute(
                     "pagination",
-                    "P{page:int}",
+                    "P{pageNum:int}",
                     new { Controller = "Home", action = "Index" });
 
                 endpoints.MapDefaultControllerRoute();
+
+                //Enable url routing to handle requests for razor pages
+                endpoints.MapRazorPages();
+
             });
 
             SeedData.EnsurePopulated(app);
