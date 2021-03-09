@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using OnlineBookstore.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace OnlineBookstore
 {
@@ -42,6 +43,10 @@ namespace OnlineBookstore
             //Enables use of the session storage - initialize session at runtime
             services.AddDistributedMemoryCache();
             services.AddSession();
+
+            //Satisfy Cart object requests with SessionCart objects -store themselves
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
         }
 

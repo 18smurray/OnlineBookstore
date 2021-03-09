@@ -15,7 +15,7 @@
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th>Book</th><th>Quantity</th><th>Price</th><th>Subtotal</th>
+            <th>Book</th><th>Quantity</th><th>Price</th><th>Subtotal</th><th></th>
         </tr>
     </thead>
     
@@ -30,6 +30,17 @@
                 <td class="text-right">@line.Book.Price</td>
                 <!--Calc subtotal by multiplying price by quantity for a particular line-->
                 <td class="text-right">@((line.Quantity * line.Book.Price).ToString("c"))</td>
+            
+                <!--Remove button-->
+                <td class="text-center">
+                    <form asp-page-handler="Remove" method="post">
+                        <input type="hidden" name="BookId" value="@line.Book.BookId" />
+                        <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            Remove
+                        </button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>
@@ -38,7 +49,7 @@
     <tfoot>
         <tr>
             <td colspan="3" class="text-right">Total:</td>
-            <td class="text-right">@Model.Cart.ComputeTotalSum().ToString("c")</td>
+            <td colspan="3" class="text-right">@Model.Cart.ComputeTotalSum().ToString("c")</td>
         </tr>
     </tfoot>
 
@@ -47,7 +58,7 @@
 <!--Continue shopping button
     Make use of the returnUrl-->
 <div class="text-center">
-    <a class="btn btn-primary" href="@Model.ReturnUrl">
+    <a class="btn btn-primary text-center" href="@Model.ReturnUrl">
         Continue Shopping
     </a>
 </div>

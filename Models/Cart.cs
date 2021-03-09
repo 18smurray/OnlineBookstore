@@ -11,7 +11,7 @@ namespace OnlineBookstore.Models
         public List<CartLine> Lines { get; set; } = new List<CartLine>();
 
         //Method for adding new books to the cart
-        public void AddItem (Book bk, int qty)
+        public virtual void AddItem (Book bk, int qty)
         {
             //Var line is set to results of query for CartLines that have the same bookid as the book it's attempting
             //to add (Ensure the same book isn't added on two separate lines)
@@ -37,12 +37,12 @@ namespace OnlineBookstore.Models
 
         //Method for removing books from the cart
         //Removes the CartLine in Lines where the bookid matches the book we're removing
-        public void RemoveLine(Book bk) =>
+        public virtual void RemoveLine(Book bk) =>
             Lines.RemoveAll(b => b.Book.BookId == bk.BookId);
 
         //Method for removing everything from the cart
         //Clear all the CartLines out of the Lines list
-        public void Clear() => Lines.Clear();
+        public virtual void Clear() => Lines.Clear();
 
         //Get total cost of cart
         public double ComputeTotalSum() =>
